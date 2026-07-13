@@ -62,3 +62,13 @@ Two behaviours can be tuned with WordPress filters (no core edits):
 
 ---
 
+## Disclaimer
+
+This plugin is provided "as is", without warranty of any kind, express or
+implied. The authors and DS.Emotion accept no responsibility or liability for
+any issues, damage, data loss, or disruption that may arise from installing,
+using, or relying on this plugin. You install and use it entirely at your own
+risk.
+
+---
+
