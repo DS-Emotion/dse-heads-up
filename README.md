@@ -15,25 +15,6 @@ newer GitHub Release is published — just like a wordpress.org plugin. The repo
 
 ---
 
-## What's inside
-
-```
-dse-heads-up/
-├── dse-heads-up.php          ← main plugin file (header + GitHub repo URL here)
-├── includes/
-│   ├── render-page.php       ← the status-board UI
-│   └── dashboard-home.php    ← embeds the board on the Dashboard home
-├── assets/
-│   ├── admin.css             ← styles (loaded inline)
-│   └── admin.js              ← behaviour (loaded inline)
-├── user-guide.txt            ← the in-app User Guide text (edit freely)
-├── plugin-update-checker/    ← the update-checker library (do not edit)
-├── readme.txt                ← WordPress-style readme
-└── README.md                 ← this file
-```
-
----
-
 ## Installing on a WordPress site
 
 - **Manual zip:** On GitHub use **Code → Download ZIP**, or download the ZIP from a
