@@ -1,0 +1,105 @@
+WordPress Heads-Up Plugin
+=========================
+
+The Heads-Up plugin helps remote teams stay connected.
+
+We know there are excellent project management tools (like Trello) or ticket
+systems (like Asana) or spreadsheets that do it all. But we also know that
+people don't always plan & communicate all the small things.
+
+Sometimes we want to make a quick update. At other times, we're working solo
+and the rest of the team don't want to read a big project plan for something
+that doesn't affect them. And so, right or wrong, we dive in and make changes
+behind the scenes. Nine times out of ten this works just fine, which is why it
+keeps happening.
+
+But, that one time, team mates bump into each other and the SEO team change
+Marketing's messages, or Dev delete the SEO drafts.
+
+Heads-Up is an extra heads-up. An instant reminder, right in front of you when
+you log in (not in a project plan buried beneath 100 tabs). It says 'hey, talk
+to your team mate before you make any changes'.
+
+--------------------------------------------------------------------
+
+Think of Heads-Up as an early warning system. Like a green or red-man at a
+street crossing, it tells you whether it's safe to proceed. But, that doesn't
+mean you can't cross if it's red, just take care. And it doesn't mean, if it's
+green you cross without looking.
+
+Heads-Up encourages communication, it doesn't replace it.
+
+If someone's in, open Chat, Slack or Teams and make sure you're not going to
+step on their toes. If nothing's going on, you're more likely to be able to
+make that small change, but don't be reckless.
+
+
+WHEN TO USE IT?
+
+Marketing + SEO
+
+Marketing realises the hero-headline on the home page doesn't quite flow.
+'Come live with us' sounds a bit strange, so you decide you need something that
+sounds better.
+
+In a different office the SEO team thinks 'Come live with us' is creepy and
+lacks search benefits. So, they hop in and change it to 'Two bedroom apartments
+in Manchester, available now'.
+
+Marketing comes back from their brainstorm with "Join the neighbourhood" and
+find it's been changed.
+
+Teams are confused, maybe a bit frustrated, and someone suggests that every
+copy change goes into a 3-point, multi-stage, colour-coded spreadsheet.
+
+OR
+
+Marketing leaves a Heads-Up status that says 'I'm working on this home page,
+thinking of some new lines'. SEO log in, see the indicator and stop what they
+were doing. They send a quick message that says 'Hi, we don't like the line
+either. Can we have a quick chat about what works best?'
+
+
+SEO + Dev
+
+SEOs are trialling different versions of a headline. They keep tweaking it to
+see which gets the best traffic and the best form conversions. It's a small one
+word change each time.
+
+Dev, seeing a whole pile of versions in the database, decides to clean it up,
+speeding things up for everyone.
+
+SEO comes back to find that the version with the best results has been deleted.
+
+Arm-waving, finger-pointing and rolling-back to previous versions occurs.
+
+OR
+
+SEO leaves a note that says 'I'm working on the availability area at the moment,
+testing out new headlines. Please don't make any changes or it'll mess up my
+reports'.
+
+
+DEV + Everyone
+
+At the beginning of the quarter we all held a big meeting to agree on the road
+map. It goes into a spreadsheet and everyone knows exactly what's happening and
+when. We agree the database needs shrinking so we'll get rid of the Later Living
+section we don't want anymore.
+
+A new Marketing Exec joins and, making themselves useful, checks spelling and
+grammar on all 50 pages of the Later Living section. Should they have checked?
+Yes. Do we want to be harsh on enthusiasm and proactive quality control? No.
+
+Dev come in, delete and clean up all the deadlinks to the perfectly written and
+now non-existent section.
+
+OR
+
+Dev leaves a note that says, I'll be coming in on Tuesday to delete this
+section.
+
+--------------------------------------------------------------------
+Developers: this text is loaded from /user-guide.txt inside the plugin folder.
+Edit this file to change the guide shown in the "User Guide" popup. You can also
+point it elsewhere with the `uao_guide_file` filter.

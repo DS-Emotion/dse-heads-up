@@ -1,0 +1,176 @@
+/* User Activity Overview — status-board styles */
+
+.uao-wrap {
+	margin: 20px 20px 40px 0;
+	max-width: 70%;
+	color: #1e1e1e;
+	--uao-inactive: #9aa0a6;
+	--uao-progress: #f5b640;
+	--uao-complete: #22c55e;
+}
+
+/* Header + stats */
+.uao-header {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: flex-start;
+	justify-content: space-between;
+	gap: 20px;
+	padding: 32px 0 22px;
+}
+.uao-header__title h1 { margin: 0; font-size: 26px; font-weight: 600; }
+.uao-subtitle { margin: 4px 0 0; font-size: 13px; color: #6b7280; }
+.uao-stats { display: flex; gap: 36px; }
+.uao-stat { display: flex; flex-direction: column; }
+.uao-stat__label { font-size: 13px; color: #6b7280; }
+.uao-stat__num { font-size: 28px; font-weight: 700; line-height: 1.1; }
+.uao-stat__num--amber { color: #c98a10; }
+.uao-stat__num--green { color: #1a9d4f; }
+
+/* Toolbar */
+.uao-toolbar { display: flex; justify-content: flex-end; margin-bottom: 16px; }
+.uao-toolbar__right { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+.uao-toolbar select, .uao-toolbar input[type="search"] { height: 34px; }
+.uao-toolbar input[type="search"] { min-width: 200px; }
+
+/* Cards */
+.uao-cards { display: flex; flex-direction: column; gap: 18px; }
+.uao-empty { color: #6b7280; padding: 20px 4px; }
+
+.uao-card {
+	border: 1px solid #e2e4e7;
+	border-radius: 10px;
+	background: #fff;
+	overflow: hidden;
+	box-shadow: 0 1px 2px rgba(0,0,0,.04);
+}
+
+/* Card header row */
+.uao-card__head {
+	display: grid;
+	grid-template-columns: 1fr 260px 220px;
+	align-items: center;
+	gap: 16px;
+	padding: 22px 28px;
+}
+.uao-card__name { font-size: 20px; font-weight: 500; display: flex; flex-direction: column; align-items: flex-start; gap: 4px; }
+.uao-card__namerow { display: flex; align-items: center; gap: 10px; }
+.uao-card__col { display: flex; flex-direction: column; gap: 6px; }
+.uao-card__lbl { font-size: 12px; font-weight: 700; color: #6b7280; }
+.uao-card__val { font-size: 14px; color: #3c434a; }
+
+.uao-you {
+	font-size: 11px;
+	font-weight: 600;
+	text-transform: uppercase;
+	letter-spacing: .04em;
+	background: #eef2ff;
+	color: #4f46e5;
+	padding: 2px 8px;
+	border-radius: 999px;
+}
+
+/* Status badge */
+.uao-badge { display: inline-flex; align-items: center; gap: 10px; font-size: 15px; font-weight: 500; }
+.uao-badge__dot { width: 16px; height: 16px; border-radius: 50%; display: inline-block; flex: 0 0 auto; }
+.uao-card--inactive    .uao-badge__dot { background: var(--uao-inactive); }
+.uao-card--in_progress .uao-badge__dot { background: var(--uao-progress); }
+.uao-card--complete    .uao-badge__dot { background: var(--uao-complete); }
+
+/* Open (In Progress / Complete): dark header, tray shown */
+.uao-card.is-open .uao-card__head { background: #3B3B3B; color: #fff; }
+.uao-card.is-open .uao-card__lbl { color: #cbd5e1; }
+.uao-card.is-open .uao-card__val { color: #e5e7eb; }
+.uao-card.is-open .uao-card__name { color: #fff; }
+
+/* Tray body */
+.uao-card__body { padding: 26px 28px 30px; border-top: 1px solid #eef0f1; }
+.uao-card__title { margin: 0 0 14px; font-size: 18px; font-weight: 700; color: #3c434a; }
+.uao-card__msg { margin: 0; font-size: 15px; line-height: 1.6; color: #50575e; max-width: 90ch; }
+.uao-card__msg--muted { color: #9ca3af; font-style: italic; }
+
+/* Self edit panel */
+.uao-card__edit { padding: 20px 28px 26px; border-top: 1px solid #eef0f1; background: #fafafb; }
+.uao-statuspick { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 18px; }
+.uao-statusbtn {
+	display: inline-flex; align-items: center; gap: 8px;
+	padding: 8px 16px; border-radius: 999px;
+	border: 1px solid #d5d8dc; background: #fff; color: #3c434a;
+	font-size: 14px; font-weight: 500; cursor: pointer; line-height: 1.2;
+}
+.uao-statusbtn:hover { border-color: #b5b9bf; }
+.uao-statusbtn__dot { width: 12px; height: 12px; border-radius: 50%; display: inline-block; }
+.uao-statusbtn--inactive    .uao-statusbtn__dot { background: var(--uao-inactive); }
+.uao-statusbtn--in_progress .uao-statusbtn__dot { background: var(--uao-progress); }
+.uao-statusbtn--complete    .uao-statusbtn__dot { background: var(--uao-complete); }
+.uao-statusbtn.is-active { border-width: 2px; padding: 7px 15px; font-weight: 600; }
+.uao-statusbtn--inactive.is-active    { border-color: var(--uao-inactive); background: #fdecec; }
+.uao-statusbtn--in_progress.is-active { border-color: var(--uao-progress); background: #fdf5e3; }
+.uao-statusbtn--complete.is-active    { border-color: var(--uao-complete); background: #e9f9ef; }
+
+.uao-field { display: block; margin-bottom: 14px; }
+.uao-field__lbl { display: block; font-size: 12px; font-weight: 700; color: #6b7280; margin-bottom: 6px; }
+.uao-input {
+	width: 100%; max-width: 640px; box-sizing: border-box;
+	border: 1px solid #dcdcde; border-radius: 6px; padding: 9px 12px;
+	font-size: 14px; background: #fff; resize: vertical;
+}
+.uao-input:focus { border-color: #2271b1; box-shadow: 0 0 0 1px #2271b1; outline: none; }
+.uao-savestate { display: inline-block; font-size: 12px; min-height: 16px; color: #6b7280; }
+.uao-savestate.is-saved { color: #1a9d4f; }
+.uao-savestate.is-error { color: #d63638; }
+
+/* Pagination */
+.uao-pagination { margin: 20px 0; text-align: right; }
+
+/* Dashboard-home embed */
+.uao-dashboard-embed { margin: 6px 0 24px; }
+.uao-dashboard-embed .uao-wrap { margin-top: 4px; }
+
+@media screen and (max-width: 900px) {
+	.uao-card__head { grid-template-columns: 1fr; gap: 12px; }
+	.uao-header { flex-direction: column; }
+}
+
+/* InActive users greyed out to indicate they are not active */
+.uao-card--inactive { background: #f4f5f6; border-color: #e6e8ea; }
+.uao-card--inactive .uao-card__name { color: #9aa0a6; }
+.uao-card--inactive .uao-card__val,
+.uao-card--inactive .uao-badge__text { color: #9aa0a6; }
+.uao-card--inactive .uao-card__lbl { color: #b0b5ba; }
+/* Keep your own card fully legible even when InActive, so you can edit it */
+.uao-card--inactive.is-self { background: #fff; }
+.uao-card--inactive.is-self .uao-card__name { color: #1e1e1e; }
+.uao-card--inactive.is-self .uao-card__val { color: #3c434a; }
+
+/* Message update timestamp */
+.uao-card__time { margin: 12px 0 0; font-size: 12px; color: #9aa0a6; font-style: italic; }
+.uao-card.is-open .uao-card__time { color: #b9bdc2; }
+.uao-card__edit .uao-card__time { display: inline-block; margin: 8px 0 0 10px; }
+
+/* Self card: read-only view + edit toggle */
+.uao-self-view .uao-view-msg { white-space: pre-line; }
+.uao-self-view .uao-edit-btn { margin-top: 4px; }
+.uao-editbar { display: flex; align-items: center; gap: 14px; margin: 6px 0 0; }
+.uao-editbar .uao-card__time { margin: 0; }
+
+/* Header right column + User Guide link */
+.uao-header__right { display: flex; flex-direction: column; align-items: flex-end; gap: 14px; }
+.uao-header__right .uao-stats { display: flex; gap: 36px; }
+.uao-guide-link { display: inline-flex; align-items: center; gap: 6px; text-decoration: none; font-weight: 600; color: #2271b1; }
+.uao-guide-link:hover { color: #135e96; }
+.uao-guide-link .dashicons { font-size: 18px; width: 18px; height: 18px; }
+
+/* User Guide modal */
+.uao-guide-modal { position: fixed; inset: 0; z-index: 100001; display: flex; align-items: center; justify-content: center; }
+.uao-guide-modal__backdrop { position: absolute; inset: 0; background: rgba(0,0,0,.5); }
+.uao-guide-modal__box { position: relative; background: #fff; max-width: 660px; width: calc(100% - 40px); max-height: 80vh; overflow: auto; border-radius: 10px; padding: 28px 34px; box-shadow: 0 12px 44px rgba(0,0,0,.32); }
+.uao-guide-modal__close { position: absolute; top: 10px; right: 14px; background: none; border: none; font-size: 26px; line-height: 1; cursor: pointer; color: #50575e; }
+.uao-guide-modal__close:hover { color: #1e1e1e; }
+.uao-guide-modal__title { margin: 0 0 16px; font-size: 20px; }
+.uao-guide-modal__content { white-space: pre-wrap; font-size: 14px; line-height: 1.6; color: #3c434a; }
+
+/* "Currently logged in" presence indicator */
+.uao-online { display: inline-flex; align-items: center; gap: 7px; font-size: 12px; font-weight: 600; color: #1a9d4f; text-transform: none; letter-spacing: 0; }
+.uao-online__dot { width: 9px; height: 9px; border-radius: 50%; background: #22c55e; box-shadow: 0 0 0 3px rgba(34,197,94,.18); display: inline-block; }
+.uao-card.is-open .uao-online { color: #4ade80; }
