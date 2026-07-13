@@ -34,24 +34,6 @@ dse-heads-up/
 
 ---
 
-## Configuration
-
-Everything site-specific lives in **`dse-heads-up.php`**:
-
-- **Header block** — `Plugin Name`, `Description`, `Version`, etc.
-- **GitHub repo URL** — the `buildUpdateChecker()` call. Point it at the public
-  repo for this plugin.
-- **Slug** — the 3rd argument to `buildUpdateChecker()` (`dse-heads-up`) must match
-  the plugin folder name.
-
-Two behaviours can be tuned with WordPress filters (no core edits):
-
-- `uao_presence_seconds` — how long after activity a user still shows as
-  "Currently logged in" (default 5 minutes).
-- `uao_guide_file` — path to the User Guide text file (default `/user-guide.txt`).
-
----
-
 ## Installing on a WordPress site
 
 - **Manual zip:** On GitHub use **Code → Download ZIP**, or download the ZIP from a
