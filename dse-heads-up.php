@@ -3,7 +3,7 @@
  * Plugin Name:       DSE Heads-Up
  * Plugin URI:        https://github.com/DS-Emotion/dse-heads-up
  * Description:        A shared team status board inside the WordPress admin. Every user can set their status (Inactive / In Progress) and open a tray describing the page and message they are working on, so the team has visibility of current activity at a glance.
- * Version:           1.0.1
+ * Version:           1.0.2
  * Requires at least: 6.0
  * Requires PHP:      7.4
  * Author:            DS.Emotion
