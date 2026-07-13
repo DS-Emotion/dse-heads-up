@@ -4,7 +4,7 @@ Tags: users, status, activity, dashboard, team
 Requires at least: 6.0
 Tested up to: 6.5
 Requires PHP: 7.4
-Stable tag: 1.0.0
+Stable tag: 1.0.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -14,7 +14,7 @@ A shared team status board inside the WordPress admin. Every user is listed and 
 
 DSE Heads-Up lists every registered user as a status card. Each person sets their own status:
 
-* InActive (grey) — the default for everyone.
+* Inactive (grey) — the default for everyone.
 * In Progress (amber) — opens their tray so the whole team can see what they are on.
 
 When a user selects In Progress, their card expands into an open "tray" with a dark header showing the page they are Working on and a free-text Message. A green "Currently logged in" indicator shows who is online right now, and each card shows the user's Last Log In time.
@@ -30,6 +30,11 @@ Updates are delivered from a public GitHub repository via the bundled Plugin Upd
 3. Open the Dashboard (or the "Heads-Up" menu item) and set your status.
 
 == Changelog ==
+
+= 1.0.1 =
+* Renamed the "InActive" status label to "Inactive".
+* Your own card is now pinned to the top of the board so you can set your status without scrolling.
+* Clicking "Done" now saves and reloads the board so the header counts and ordering stay accurate.
 
 = 1.0.0 =
 * First release as DSE Heads-Up, packaged for GitHub-based updates.

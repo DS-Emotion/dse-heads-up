@@ -88,28 +88,32 @@
 		card.find( '.uao-card__edit' ).show();
 	} );
 
-	// Finish editing — sync the read-only view from the inputs, then collapse.
+	// Finish editing — save any pending changes, then reload the page so the
+	// header counts are recalculated and the board re-sorts (your card stays
+	// pinned to the top). Reloading avoids the stale count that could appear
+	// when only part of the board was updated via AJAX.
 	$( document ).on( 'click', '.uao-done-btn', function () {
-		var card = $( this ).closest( '.uao-card' );
-		var wo   = $.trim( card.find( '[data-field="working_on"]' ).val() );
-		var msg  = card.find( '[data-field="message"]' ).val();
+		var $btn   = $( this );
+		var card   = $btn.closest( '.uao-card' );
+		var $wo    = card.find( '[data-field="working_on"]' );
+		var $msg   = card.find( '[data-field="message"]' );
+		var $state = card.find( '.uao-savestate' );
 
-		var $title = card.find( '.uao-view-title' );
-		if ( wo ) {
-			$title.text( UAO.workingOn + ' ' + wo ).show();
-		} else {
-			$title.hide();
-		}
+		// Cancel pending debounced autosaves so we do not double-post.
+		clearTimeout( timers[ card.data( 'user' ) + '-working_on' ] );
+		clearTimeout( timers[ card.data( 'user' ) + '-message' ] );
 
-		var $msg = card.find( '.uao-view-msg' );
-		if ( $.trim( msg ) ) {
-			$msg.text( msg ).removeClass( 'uao-card__msg--muted' );
-		} else {
-			$msg.text( UAO.noUpdate ).addClass( 'uao-card__msg--muted' );
-		}
+		// Guard against a double click while saving.
+		$btn.prop( 'disabled', true );
 
-		card.find( '.uao-card__edit' ).hide();
-		card.find( '.uao-self-view' ).show();
+		// Persist both text fields (status saves on click), then reload once
+		// the server has stored everything.
+		$.when(
+			post( card, 'working_on', $.trim( $wo.val() ), $state ),
+			post( card, 'message', $msg.val(), null )
+		).always( function () {
+			window.location.reload();
+		} );
 	} );
 
 	// User Guide modal open/close.

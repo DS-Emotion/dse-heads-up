@@ -33,12 +33,19 @@ function uao_render_page() {
 		}
 	}
 
-	// ---- Sort: In Progress first, InActive last; then by name. ----
+	// ---- Sort: yourself first, then In Progress, then Inactive; then by name. ----
 	$rank = array( 'in_progress' => 0, 'inactive' => 1 );
 	$rows = $users;
 	usort(
 		$rows,
-		function ( $a, $b ) use ( $rank ) {
+		function ( $a, $b ) use ( $rank, $current_user_id ) {
+			// Always pin the logged-in user to the very top so they can set
+			// their own status without scrolling to find their name.
+			$sa = ( (int) $a->ID === $current_user_id );
+			$sb = ( (int) $b->ID === $current_user_id );
+			if ( $sa !== $sb ) {
+				return $sa ? -1 : 1;
+			}
 			$ra = $rank[ uao_get_status( $a->ID ) ];
 			$rb = $rank[ uao_get_status( $b->ID ) ];
 			if ( $ra !== $rb ) {

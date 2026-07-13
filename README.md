@@ -1,7 +1,7 @@
 # DSE Heads-Up
 
 A shared team **status board** inside the WordPress admin. Every user is listed
-and can set their own status (**InActive / In Progress**) and open a "tray"
+and can set their own status (**Inactive / In Progress**) and open a "tray"
 describing the page and message they are working on — so the team has visibility
 of current activity at a glance, without having to ask.
 

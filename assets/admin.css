@@ -132,13 +132,13 @@
 	.uao-header { flex-direction: column; }
 }
 
-/* InActive users greyed out to indicate they are not active */
+/* Inactive users greyed out to indicate they are not active */
 .uao-card--inactive { background: #f4f5f6; border-color: #e6e8ea; }
 .uao-card--inactive .uao-card__name { color: #9aa0a6; }
 .uao-card--inactive .uao-card__val,
 .uao-card--inactive .uao-badge__text { color: #9aa0a6; }
 .uao-card--inactive .uao-card__lbl { color: #b0b5ba; }
-/* Keep your own card fully legible even when InActive, so you can edit it */
+/* Keep your own card fully legible even when Inactive, so you can edit it */
 .uao-card--inactive.is-self { background: #fff; }
 .uao-card--inactive.is-self .uao-card__name { color: #1e1e1e; }
 .uao-card--inactive.is-self .uao-card__val { color: #3c434a; }
