@@ -112,22 +112,22 @@ on Tuesday". Untick the box when it no longer applies and the popup goes away
 for everyone. If you edit your message while the box is ticked, everyone will
 be asked to confirm the new version.
 
-SUPER ADMINS & CONTENT FREEZE
+ADMIN PLUS & CONTENT FREEZE
 
 Some moments call for more than a heads-up: a deploy, a content audit, a
-migration. Users with the "Super Admin" role (set in Users -> edit user ->
+migration. Users with the "Admin Plus" role (set in Users -> edit user ->
 Role) have an extra CONTENT FREEZE tick box on their own card.
 
 Ticking it locks the whole CMS for everyone else - content, media, themes,
-plugins, settings and users can't be changed by anyone without the Super
-Admin role. Everyone can still log in, look around and use Heads-Up. A red
+plugins, settings and users can't be changed by anyone without the Admin
+Plus role. Everyone can still log in, look around and use Heads-Up. A red
 banner shows on every admin screen while the freeze is on, and the freeze is
 announced as a popup. That popup cannot be dismissed - there is no confirm
-button on it, and it stays in front of everyone (except Super Admins) until
-the freeze is lifted.
+button on it, and it stays in front of everyone (except Admin Plus users)
+until the freeze is lifted.
 
-Any Super Admin can lift the freeze by unticking the box. Keep at least one
-Super Admin around while a freeze is active!
+Any Admin Plus user can lift the freeze by unticking the box. Keep at least
+one Admin Plus user around while a freeze is active!
 
 --------------------------------------------------------------------
 Developers: this text is loaded from /user-guide.txt inside the plugin folder.

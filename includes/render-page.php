@@ -119,7 +119,7 @@ function uao_render_page() {
 							<span class="uao-card__namerow">
 								<?php echo esc_html( $u->display_name ); ?>
 								<?php if ( $is_self ) : ?><span class="uao-you"><?php esc_html_e( 'You', 'dse-heads-up' ); ?></span><?php endif; ?>
-								<?php if ( uao_user_is_super( $u->ID ) ) : ?><span class="uao-super"><?php esc_html_e( 'Super Admin', 'dse-heads-up' ); ?></span><?php endif; ?>
+								<?php if ( uao_user_is_super( $u->ID ) ) : ?><span class="uao-super"><?php esc_html_e( 'Admin Plus', 'dse-heads-up' ); ?></span><?php endif; ?>
 								<?php if ( uao_freeze_by() === (int) $u->ID ) : ?><span class="uao-freeze-chip"><?php esc_html_e( 'Content Freeze', 'dse-heads-up' ); ?></span><?php endif; ?>
 							</span>
 							<?php if ( uao_is_logged_in( $u->ID ) ) : ?>
@@ -177,7 +177,7 @@ function uao_render_page() {
 							<div class="uao-field uao-freeze-field">
 								<label class="uao-freeze-toggle">
 									<input type="checkbox" class="uao-freeze-check" <?php checked( uao_is_frozen() ); ?> />
-									<span><strong><?php esc_html_e( 'CONTENT FREEZE', 'dse-heads-up' ); ?></strong> — <?php esc_html_e( 'lock the whole CMS. Nobody except Super Admins can edit content, media, themes, plugins, settings or users until this is unticked. Your message is announced to everyone.', 'dse-heads-up' ); ?></span>
+									<span><strong><?php esc_html_e( 'CONTENT FREEZE', 'dse-heads-up' ); ?></strong> — <?php esc_html_e( 'lock the whole CMS. Nobody except Admin Plus users can edit content, media, themes, plugins, settings or users until this is unticked. Your message is announced to everyone.', 'dse-heads-up' ); ?></span>
 								</label>
 							</div>
 							<?php endif; ?>

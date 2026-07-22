@@ -3,7 +3,7 @@
  * Plugin Name:       DSE Heads-Up
  * Plugin URI:        https://github.com/DS-Emotion/dse-heads-up
  * Description:        A shared team status board inside the WordPress admin. Every user can set their status (Inactive / In Progress) and open a tray describing the page and message they are working on, so the team has visibility of current activity at a glance.
- * Version:           1.2.1
+ * Version:           1.2.2
  * Requires at least: 6.0
  * Requires PHP:      7.4
  * Author:            DS.Emotion
@@ -35,7 +35,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'UAO_VERSION', '1.2.1' );
+define( 'UAO_VERSION', '1.2.2' );
 define( 'UAO_FILE', __FILE__ );
 define( 'UAO_URL', plugin_dir_url( __FILE__ ) );
 define( 'UAO_PATH', plugin_dir_path( __FILE__ ) );
@@ -398,7 +398,7 @@ function uao_ajax_save() {
 
 		case 'freeze':
 			if ( ! current_user_can( 'uao_super_admin' ) ) {
-				wp_send_json_error( array( 'message' => __( 'Only Super Admins can use Content Freeze.', 'dse-heads-up' ) ), 403 );
+				wp_send_json_error( array( 'message' => __( 'Only Admin Plus users can use Content Freeze.', 'dse-heads-up' ) ), 403 );
 			}
 			if ( '1' === $value ) {
 				update_option(
@@ -415,7 +415,7 @@ function uao_ajax_save() {
 				}
 			} else {
 				// Clear the auto-announcement of whoever activated the freeze
-				// (any Super Admin may lift a freeze, not just its creator).
+				// (any Admin Plus user may lift a freeze, not just its creator).
 				$freezer = uao_freeze_by();
 				if ( $freezer && get_user_meta( $freezer, 'uao_announce_by_freeze', true ) ) {
 					delete_user_meta( $freezer, 'uao_announce' );
@@ -485,8 +485,8 @@ function uao_get_pending_announcements( $viewer_id ) {
 			continue;
 		}
 		// The active Content Freeze announcement is "locked" for everyone
-		// without the Super Admin capability: it has no confirm button and
-		// keeps showing until a Super Admin lifts the freeze.
+		// without the Admin Plus capability: it has no confirm button and
+		// keeps showing until an Admin Plus user lifts the freeze.
 		$locked = ( uao_is_frozen() && uao_freeze_by() === (int) $u->ID && ! user_can( $viewer_id, 'uao_super_admin' ) );
 
 		// Already confirmed this (or a newer) version of the announcement.
@@ -541,7 +541,7 @@ function uao_render_announcement_popup() {
 						<p class="uao-announce-item__msg uao-announce-item__msg--muted"><?php esc_html_e( 'No message provided.', 'dse-heads-up' ); ?></p>
 					<?php endif; ?>
 					<?php if ( ! empty( $a['locked'] ) ) : ?>
-						<p class="uao-announce-item__locked"><span class="dashicons dashicons-lock"></span><?php esc_html_e( 'The site is under a Content Freeze. This notice will stay until a Super Admin lifts it.', 'dse-heads-up' ); ?></p>
+						<p class="uao-announce-item__locked"><span class="dashicons dashicons-lock"></span><?php esc_html_e( 'The site is under a Content Freeze. This notice will stay until an Admin Plus user lifts it.', 'dse-heads-up' ); ?></p>
 					<?php else : ?>
 						<button type="button" class="button button-primary uao-announce-confirm"><?php esc_html_e( 'I’ve seen this', 'dse-heads-up' ); ?></button>
 						<span class="uao-announce-item__err" aria-live="polite"></span>
@@ -585,20 +585,22 @@ add_action( 'wp_ajax_uao_ack', 'uao_ajax_ack' );
 
 /*
 |--------------------------------------------------------------------------
-| Super Admin role + Content Freeze
+| Admin Plus role + Content Freeze
 |--------------------------------------------------------------------------
-| A custom "Super Admin" role (a clone of Administrator plus the
+| A custom "Admin Plus" role (slug dse_super_admin, a clone of Administrator plus the
 | `uao_super_admin` capability) gets an extra CONTENT FREEZE toggle on their
 | own Heads-Up card. While a freeze is active, every user WITHOUT the
 | `uao_super_admin` capability loses editing capabilities across the whole
 | CMS (content, media, themes, plugins, settings, users). They can still log
-| in, browse wp-admin and use the Heads-Up board. Any Super Admin can lift
+| in, browse wp-admin and use the Heads-Up board. Any Admin Plus user can lift
 | the freeze. Assign the role in Users -> (edit user) -> Role.
 */
 
 /**
- * Register the Super Admin role (idempotent, runs on init so it also
- * appears after plugin updates without needing re-activation).
+ * Register the Admin Plus role (idempotent, runs on init so it also
+ * appears after plugin updates without needing re-activation). The role
+ * keeps the original slug `dse_super_admin`, so existing assignments
+ * survive; only the display name changes.
  */
 function uao_register_super_admin_role() {
 	$role = get_role( 'dse_super_admin' );
@@ -607,9 +609,21 @@ function uao_register_super_admin_role() {
 		$caps  = $admin ? $admin->capabilities : array( 'read' => true );
 
 		$caps['uao_super_admin'] = true;
-		add_role( 'dse_super_admin', __( 'Super Admin', 'dse-heads-up' ), $caps );
-	} elseif ( ! $role->has_cap( 'uao_super_admin' ) ) {
+		add_role( 'dse_super_admin', __( 'Admin Plus', 'dse-heads-up' ), $caps );
+		return;
+	}
+
+	if ( ! $role->has_cap( 'uao_super_admin' ) ) {
 		$role->add_cap( 'uao_super_admin' );
+	}
+
+	// Migrate the stored display name from the old "Super Admin" label.
+	$wp_roles = wp_roles();
+	$new_name = __( 'Admin Plus', 'dse-heads-up' );
+	if ( isset( $wp_roles->role_names['dse_super_admin'] ) && $new_name !== $wp_roles->role_names['dse_super_admin'] ) {
+		$caps = $role->capabilities;
+		remove_role( 'dse_super_admin' );
+		add_role( 'dse_super_admin', $new_name, $caps );
 	}
 }
 add_action( 'init', 'uao_register_super_admin_role' );
@@ -645,7 +659,7 @@ function uao_freeze_by() {
 }
 
 /**
- * Does this user hold the Super Admin capability?
+ * Does this user hold the Admin Plus capability?
  *
  * @param int $user_id User ID.
  * @return bool
@@ -686,7 +700,7 @@ function uao_frozen_caps() {
 
 /**
  * While frozen, strip editing capabilities from everyone who is not a
- * Super Admin. Runs on every capability check (user_has_cap), which also
+ * Admin Plus user. Runs on every capability check (user_has_cap), which also
  * covers the REST API, XML-RPC, admin menus and the block editor.
  *
  * @param array $allcaps All capabilities of the user.
@@ -696,7 +710,7 @@ function uao_freeze_block_caps( $allcaps ) {
 	if ( ! uao_is_frozen() ) {
 		return $allcaps;
 	}
-	// Super Admins keep everything. (Checked via $allcaps to avoid the
+	// Admin Plus users keep everything. (Checked via $allcaps to avoid the
 	// infinite recursion that current_user_can() would cause here.)
 	if ( ! empty( $allcaps['uao_super_admin'] ) ) {
 		return $allcaps;
@@ -717,16 +731,16 @@ function uao_render_freeze_banner() {
 	}
 	$info = uao_freeze_info();
 	$user = get_userdata( (int) $info['by'] );
-	$name = $user ? $user->display_name : __( 'a Super Admin', 'dse-heads-up' );
+	$name = $user ? $user->display_name : __( 'an Admin Plus user', 'dse-heads-up' );
 	$time = isset( $info['time'] ) ? uao_format_updated( (int) $info['time'] ) : '';
 	?>
 	<div class="uao-freeze-banner">
 		<span class="dashicons dashicons-lock"></span>
 		<span>
 			<strong><?php esc_html_e( 'CONTENT FREEZE', 'dse-heads-up' ); ?></strong>
-			<?php printf( esc_html__( '%1$s has locked the site since %2$s. Only Super Admins can make changes.', 'dse-heads-up' ), esc_html( $name ), esc_html( $time ) ); ?>
+			<?php printf( esc_html__( '%1$s has locked the site since %2$s. Only Admin Plus users can make changes.', 'dse-heads-up' ), esc_html( $name ), esc_html( $time ) ); ?>
 			<?php if ( current_user_can( 'uao_super_admin' ) ) : ?>
-				<?php esc_html_e( 'You are a Super Admin, so you can still edit. Untick Content Freeze on your Heads-Up card to lift it.', 'dse-heads-up' ); ?>
+				<?php esc_html_e( 'You have the Admin Plus role, so you can still edit. Untick Content Freeze on your Heads-Up card to lift it.', 'dse-heads-up' ); ?>
 			<?php endif; ?>
 		</span>
 	</div>

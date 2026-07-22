@@ -4,7 +4,7 @@ Tags: users, status, activity, dashboard, team
 Requires at least: 6.0
 Tested up to: 6.5
 Requires PHP: 7.4
-Stable tag: 1.2.1
+Stable tag: 1.2.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -30,6 +30,9 @@ Updates are delivered from a public GitHub repository via the bundled Plugin Upd
 3. Open the Dashboard (or the "Heads-Up" menu item) and set your status.
 
 == Changelog ==
+
+= 1.2.2 =
+* Renamed the "Super Admin" role to "Admin Plus" to avoid confusion with the WordPress multisite Super Admin. The role slug is unchanged, so existing role assignments carry over automatically (the stored label is migrated on the next page load).
 
 = 1.2.1 =
 * The Content Freeze announcement popup can no longer be dismissed by non-Super-Admins: its confirm button is removed and the popup stays on every admin screen until a Super Admin lifts the freeze. Regular announcements are unaffected.
