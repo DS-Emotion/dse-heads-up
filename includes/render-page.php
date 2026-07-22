@@ -119,6 +119,8 @@ function uao_render_page() {
 							<span class="uao-card__namerow">
 								<?php echo esc_html( $u->display_name ); ?>
 								<?php if ( $is_self ) : ?><span class="uao-you"><?php esc_html_e( 'You', 'dse-heads-up' ); ?></span><?php endif; ?>
+								<?php if ( uao_user_is_super( $u->ID ) ) : ?><span class="uao-super"><?php esc_html_e( 'Super Admin', 'dse-heads-up' ); ?></span><?php endif; ?>
+								<?php if ( uao_freeze_by() === (int) $u->ID ) : ?><span class="uao-freeze-chip"><?php esc_html_e( 'Content Freeze', 'dse-heads-up' ); ?></span><?php endif; ?>
 							</span>
 							<?php if ( uao_is_logged_in( $u->ID ) ) : ?>
 								<span class="uao-online"><span class="uao-online__dot"></span><?php esc_html_e( 'Currently logged in', 'dse-heads-up' ); ?></span>
@@ -140,6 +142,9 @@ function uao_render_page() {
 					<?php if ( $is_self ) : ?>
 
 						<div class="uao-card__body uao-self-view">
+							<?php if ( uao_is_announcing( $u->ID ) ) : ?>
+								<p class="uao-announce-note"><span class="dashicons dashicons-megaphone"></span><?php esc_html_e( 'Announcing to everyone — your message pops up for all users until they confirm it.', 'dse-heads-up' ); ?></p>
+							<?php endif; ?>
 							<h3 class="uao-card__title uao-view-title"<?php echo $working_on ? '' : ' style="display:none;"'; ?>><?php echo $working_on ? esc_html( sprintf( __( 'Working on %s', 'dse-heads-up' ), $working_on ) ) : ''; ?></h3>
 							<p class="uao-card__msg uao-view-msg<?php echo $message ? '' : ' uao-card__msg--muted'; ?>"><?php echo $message ? esc_html( $message ) : esc_html__( 'No update yet — set your status and message.', 'dse-heads-up' ); ?></p>
 							<p class="uao-card__time uao-view-time"<?php echo $updated ? '' : ' style="display:none;"'; ?>><?php echo $updated ? esc_html( sprintf( __( 'Updated %s', 'dse-heads-up' ), uao_format_updated( $updated ) ) ) : ''; ?></p>
@@ -162,6 +167,20 @@ function uao_render_page() {
 								<span class="uao-field__lbl"><?php esc_html_e( 'Message', 'dse-heads-up' ); ?></span>
 								<textarea class="uao-input" data-field="message" rows="4" placeholder="<?php esc_attr_e( 'Describe what you are working on…', 'dse-heads-up' ); ?>"><?php echo esc_textarea( $message ); ?></textarea>
 							</label>
+							<div class="uao-field uao-announce-field">
+								<label class="uao-announce-toggle">
+									<input type="checkbox" class="uao-announce-check" <?php checked( uao_is_announcing( $u->ID ) ); ?> />
+									<span><?php esc_html_e( 'Announce to everyone — show this message as a popup on every admin screen. Each user must click to confirm they have seen it.', 'dse-heads-up' ); ?></span>
+								</label>
+							</div>
+							<?php if ( current_user_can( 'uao_super_admin' ) ) : ?>
+							<div class="uao-field uao-freeze-field">
+								<label class="uao-freeze-toggle">
+									<input type="checkbox" class="uao-freeze-check" <?php checked( uao_is_frozen() ); ?> />
+									<span><strong><?php esc_html_e( 'CONTENT FREEZE', 'dse-heads-up' ); ?></strong> — <?php esc_html_e( 'lock the whole CMS. Nobody except Super Admins can edit content, media, themes, plugins, settings or users until this is unticked. Your message is announced to everyone.', 'dse-heads-up' ); ?></span>
+								</label>
+							</div>
+							<?php endif; ?>
 							<p class="uao-editbar">
 								<button type="button" class="button button-primary uao-done-btn"><?php esc_html_e( 'Done', 'dse-heads-up' ); ?></button>
 								<span class="uao-savestate" aria-live="polite"></span>

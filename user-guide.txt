@@ -99,6 +99,36 @@ OR
 Dev leaves a note that says, I'll be coming in on Tuesday to delete this
 section.
 
+ANNOUNCEMENTS
+
+Sometimes a status update is too important to risk being missed. Tick the
+"Announce to everyone" box under your message and it becomes a popup that
+appears in front of every user, on any admin screen, until they click
+"I've seen this" to confirm.
+
+Use it sparingly - it interrupts everyone. Perfect for things like "deploying
+at 3pm, please don't publish anything" or "deleting the Later Living section
+on Tuesday". Untick the box when it no longer applies and the popup goes away
+for everyone. If you edit your message while the box is ticked, everyone will
+be asked to confirm the new version.
+
+SUPER ADMINS & CONTENT FREEZE
+
+Some moments call for more than a heads-up: a deploy, a content audit, a
+migration. Users with the "Super Admin" role (set in Users -> edit user ->
+Role) have an extra CONTENT FREEZE tick box on their own card.
+
+Ticking it locks the whole CMS for everyone else - content, media, themes,
+plugins, settings and users can't be changed by anyone without the Super
+Admin role. Everyone can still log in, look around and use Heads-Up. A red
+banner shows on every admin screen while the freeze is on, and the freeze is
+announced as a popup. That popup cannot be dismissed - there is no confirm
+button on it, and it stays in front of everyone (except Super Admins) until
+the freeze is lifted.
+
+Any Super Admin can lift the freeze by unticking the box. Keep at least one
+Super Admin around while a freeze is active!
+
 --------------------------------------------------------------------
 Developers: this text is loaded from /user-guide.txt inside the plugin folder.
 Edit this file to change the guide shown in the "User Guide" popup. You can also

@@ -29,8 +29,10 @@
 			} else if ( $state ) {
 				$state.addClass( 'is-error' ).text( ( res && res.data && res.data.message ) || UAO.error );
 			}
-		} ).fail( function () {
-			if ( $state ) { $state.addClass( 'is-error' ).text( UAO.error ); }
+		} ).fail( function ( xhr ) {
+			if ( $state ) {
+				$state.addClass( 'is-error' ).text( UAO.error + ' (HTTP ' + ( xhr && xhr.status ? xhr.status : 'no connection' ) + ')' );
+			}
 		} );
 	}
 
@@ -113,6 +115,57 @@
 			post( card, 'message', $msg.val(), null )
 		).always( function () {
 			window.location.reload();
+		} );
+	} );
+
+	// Announce checkbox — saves immediately.
+	$( document ).on( 'change', '.uao-announce-check', function () {
+		var $el  = $( this );
+		var card = $el.closest( '.uao-card' );
+		post( card, 'announce', $el.is( ':checked' ) ? '1' : '', card.find( '.uao-savestate' ) );
+	} );
+
+	// Content Freeze toggle (Super Admins only) — save, then reload so
+	// the banner, chips and capability changes take effect everywhere.
+	$( document ).on( 'change', '.uao-freeze-check', function () {
+		var $el  = $( this );
+		var card = $el.closest( '.uao-card' );
+		$el.prop( 'disabled', true );
+		post( card, 'freeze', $el.is( ':checked' ) ? '1' : '', card.find( '.uao-savestate' ) ).always( function () {
+			window.location.reload();
+		} );
+	} );
+
+	// Announcement popup — confirm an item as seen.
+	$( document ).on( 'click', '.uao-announce-confirm', function () {
+		var $btn  = $( this );
+		var $item = $btn.closest( '.uao-announce-item' );
+
+		$btn.prop( 'disabled', true ).text( UAO.saving );
+
+		$.post( UAO.ajaxUrl, {
+			action:    'uao_ack',
+			nonce:     UAO.nonce,
+			announcer: $item.data( 'announcer' ),
+			updated:   $item.data( 'updated' )
+		} ).done( function ( res ) {
+			if ( res && res.success ) {
+				$item.slideUp( 200, function () {
+					$item.remove();
+					// Close the overlay once every announcement is confirmed.
+					if ( ! $( '#uao-announce-modal .uao-announce-item' ).length ) {
+						$( '#uao-announce-modal' ).fadeOut( 150, function () {
+							$( this ).remove();
+						} );
+					}
+				} );
+			} else {
+				$btn.prop( 'disabled', false ).text( UAO.confirmBtn );
+				$item.find( '.uao-announce-item__err' ).text( ( res && res.data && res.data.message ) || UAO.error );
+			}
+		} ).fail( function ( xhr ) {
+			$btn.prop( 'disabled', false ).text( UAO.confirmBtn );
+			$item.find( '.uao-announce-item__err' ).text( UAO.error + ' (HTTP ' + ( xhr && xhr.status ? xhr.status : 'no connection' ) + ')' );
 		} );
 	} );
 

@@ -170,6 +170,52 @@
 .uao-guide-modal__title { margin: 0 0 16px; font-size: 20px; }
 .uao-guide-modal__content { white-space: pre-wrap; font-size: 14px; line-height: 1.6; color: #3c434a; }
 
+/* Announce checkbox in the edit panel */
+.uao-announce-field { margin: 4px 0 16px; }
+.uao-announce-toggle { display: flex; align-items: flex-start; gap: 9px; font-size: 13px; line-height: 1.5; color: #3c434a; cursor: pointer; max-width: 640px; }
+.uao-announce-toggle input[type="checkbox"] { margin: 1px 0 0; flex: 0 0 auto; }
+
+/* "Announcing" note on your own card */
+.uao-announce-note { display: inline-flex; align-items: center; gap: 6px; margin: 0 0 12px; font-size: 12px; font-weight: 600; color: #c98a10; }
+.uao-announce-note .dashicons { font-size: 16px; width: 16px; height: 16px; }
+
+/* Announcement overlay popup (printed in admin_footer on every admin page) */
+.uao-announce-modal { position: fixed; inset: 0; z-index: 100002; display: flex; align-items: center; justify-content: center; }
+.uao-announce-modal__backdrop { position: absolute; inset: 0; background: rgba(0,0,0,.6); }
+.uao-announce-modal__box { position: relative; background: #fff; max-width: 620px; width: calc(100% - 40px); max-height: 82vh; overflow: auto; border-radius: 12px; padding: 28px 34px 22px; box-shadow: 0 16px 48px rgba(0,0,0,.35); }
+.uao-announce-modal__title { display: flex; align-items: center; gap: 10px; margin: 0 0 6px; font-size: 21px; }
+.uao-announce-modal__title .dashicons { color: #c98a10; font-size: 24px; width: 24px; height: 24px; }
+.uao-announce-modal__intro { margin: 0 0 18px; color: #6b7280; font-size: 13px; }
+.uao-announce-item { border: 1px solid #e8dbc0; border-left: 4px solid #f5b640; border-radius: 8px; padding: 16px 18px 14px; margin-bottom: 14px; background: #fffdf7; }
+.uao-announce-item__head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; margin-bottom: 8px; flex-wrap: wrap; }
+.uao-announce-item__name { font-size: 16px; font-weight: 700; color: #1e1e1e; }
+.uao-announce-item__time { font-size: 12px; color: #9aa0a6; font-style: italic; }
+.uao-announce-item__title { margin: 0 0 8px; font-size: 14px; font-weight: 600; color: #3c434a; }
+.uao-announce-item__msg { margin: 0 0 14px; font-size: 14px; line-height: 1.6; color: #50575e; }
+.uao-announce-item__msg--muted { color: #9ca3af; font-style: italic; }
+.uao-announce-confirm.button { margin-bottom: 2px; }
+.uao-announce-item__err { display: inline-block; margin-left: 10px; font-size: 12px; color: #d63638; }
+
+/* Super Admin + Content Freeze chips */
+.uao-super { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: .04em; background: #ede9fe; color: #6d28d9; padding: 2px 8px; border-radius: 999px; }
+.uao-freeze-chip { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .04em; background: #fee2e2; color: #b91c1c; padding: 2px 8px; border-radius: 999px; }
+
+/* Content Freeze toggle in the edit panel */
+.uao-freeze-field { margin: 0 0 16px; }
+.uao-freeze-toggle { display: flex; align-items: flex-start; gap: 9px; font-size: 13px; line-height: 1.5; color: #b91c1c; cursor: pointer; max-width: 640px; }
+.uao-freeze-toggle input[type="checkbox"] { margin: 1px 0 0; flex: 0 0 auto; }
+.uao-freeze-toggle strong { letter-spacing: .03em; }
+
+/* Site-wide freeze banner */
+.uao-freeze-banner { display: flex; align-items: flex-start; gap: 10px; margin: 12px 20px 12px 2px; padding: 14px 18px; background: #b91c1c; color: #fff; border-radius: 8px; font-size: 14px; line-height: 1.5; }
+.uao-freeze-banner .dashicons { font-size: 20px; width: 20px; height: 20px; flex: 0 0 auto; margin-top: 1px; }
+.uao-freeze-banner strong { margin-right: 6px; letter-spacing: .03em; }
+
+/* Freeze announcement inside the popup */
+.uao-announce-item--freeze { border-color: #f3c1c1; border-left-color: #dc2626; background: #fef2f2; }
+.uao-announce-item__locked { display: flex; align-items: center; gap: 7px; margin: 0; font-size: 13px; font-weight: 600; color: #b91c1c; }
+.uao-announce-item__locked .dashicons { font-size: 17px; width: 17px; height: 17px; }
+
 /* "Currently logged in" presence indicator */
 .uao-online { display: inline-flex; align-items: center; gap: 7px; font-size: 12px; font-weight: 600; color: #1a9d4f; text-transform: none; letter-spacing: 0; }
 .uao-online__dot { width: 9px; height: 9px; border-radius: 50%; background: #22c55e; box-shadow: 0 0 0 3px rgba(34,197,94,.18); display: inline-block; }
